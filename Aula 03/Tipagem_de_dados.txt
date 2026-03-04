@@ -1,0 +1,51 @@
+ 1️⃣ Tipos Numéricos
+🔸 Inteiros
+Byte (8 bits)
+Short (16 bits)
+Int (32 bits)
+Long (64 bits)
+val a: Byte = 1
+val b: Int = 100
+val c: Long = 1000L
+
+🔸 Ponto flutuante
+Float (32 bits)
+Double (64 bits)
+val x: Float = 10.5f
+val y: Double = 20.99
+
+
+2️⃣ Tipo Booleano
+val ativo: Boolean = true
+
+
+3️⃣ Tipo Caractere
+val letra: Char = 'A'
+
+
+4️⃣ Tipo Textual
+val nome: String = "Kotlin"
+
+
+5️⃣  Tipo flexível
+val qualquer: Any = 10
+
+
+6️⃣ Sem retorno (Equivale ao void do Java)
+fun imprimir(): Unit {
+    println("Oi")
+}
+
+
+7️⃣ Sem retorno e utilizado quando há algum erro (Usado amplamente com Throws/Exception)
+fun erro(): Nothing {
+    throw Exception("Erro")
+}
+
+
+8️⃣ Tipos Nullable (Qualquer tipo pode ser nullable usando ?)
+Int?
+String?
+Boolean?
+Usuario?
+Exemplo: val nome: String? = null

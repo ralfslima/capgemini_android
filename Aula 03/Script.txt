@@ -1,0 +1,56 @@
+// Inicialização
+fun main(){
+
+    // Null Safety
+    var texto : String? = null
+    var numero : Int? = null
+
+    // Elvis Operator
+    print(texto?.length ?: "O texto não pode ser nulo")
+    
+    //******************WHEN (Switch/Case)
+    //val dia : Int = 4
+
+    //val diaDaSemana = when (dia) {
+    //    1 -> "Domingo"
+    //    2 -> "Segunda-feira"
+    //    3 -> "Terça-feira"
+    //   4 -> "Quarta-feira"
+    //    5 -> "Quinta-feira"
+    //    6 -> "Sexta-feira"
+    //    7 -> "Sábado"
+    //    else -> "Dia não reconhecido"
+    //}
+
+    //******************Condicional
+    //val idade: Int = 20
+
+    //val situacao : String = if (idade >= 18) "Maior de idade" else "Menor de idade"
+    //print(if (idade >= 18) "Maior de idade" else "Menor de idade")
+
+    //if (idade >= 18) {
+    //    print("Maior de idade")
+    //} else {
+    //    print("Menor de idade")
+    //}
+
+    //if (idade >= 18)
+    //    print("Maior de idade")
+    //else
+    //    print("Menor de idade")
+
+    //******************Constantes
+    //val valorDolar = 5.20
+    //val pi : Double = 3.14
+
+    //******************Variáveis
+    //var nome = "Ralf"
+    //var nome : String = "Ralf"
+    //var idade : Int = 36
+
+    //print("Olá "+nome+", você tem "+idade+" anos.")
+    //print("Olá $nome, você tem $idade anos.")
+
+    //******************Exibir mensagem
+    //print("Hello World!")
+}
