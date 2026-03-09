@@ -3,6 +3,80 @@ package com.example.nivelamento
 // Inicialização
 fun main () {
 
+    //******************Conceitos - Funções, funções anônimas e lambdas
+    //    fun soma1(numero1 : Int, numero2 : Int) : Int{
+    //        return numero1 + numero2
+    //    }
+    //
+    //    val soma2 = fun(numero1 : Int, numero2: Int) = numero1 + numero2
+    //
+    //    val soma3 = fun(numero1: Int, numero2: Int) : Int{
+    //        return numero1 + numero2
+    //    }
+    //
+    //    val soma4 = {numero1 : Int, numero2 : Int -> numero1 + numero2}
+
+    //******************High-Order Functions
+    //    val numeros = arrayOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    //
+    //    val pares = fun(lista : Array<Int>) : Sequence<Int>
+    //    = lista.asSequence().filter { it % 2 == 0 }
+    //
+    //    val impares = fun(lista : Array<Int>) : Sequence<Int>
+    //    = lista.asSequence().filter { it % 2 != 0 }
+    //
+    //    val multiplo3 = fun(lista : Array<Int>) : Sequence<Int>
+    //    = lista.asSequence().filter { it % 3 == 0 }
+
+    // Maneira correta
+    //    val funcaoPrincipal = fun(
+    //        lista : Array<Int>,
+    //        tipo : (Array<Int>) -> Sequence<Int>
+    //    ):Sequence<Int>{
+    //        return tipo(lista).asSequence().filter{ it >= 5 }
+    //    }
+    //
+    //    println("***PARES***")
+    //    funcaoPrincipal(numeros, pares).forEach { println(it) }
+    //
+    //    println("***ÍMPARES***")
+    //    funcaoPrincipal(numeros, impares).forEach { println(it) }
+    //
+    //    println("***MÚLTIPLO DE 3***")
+    //    funcaoPrincipal(numeros, multiplo3).forEach { println(it) }
+
+    // Maneira incorreta
+    //    val funcaoPrincipal = fun(lista : Array<Int>, tipo : String){
+    //        when(tipo){
+    //            "par"       -> pares(lista).forEach { println(it) }
+    //            "impar"     -> impares(lista).forEach { println(it) }
+    //            "multiplo3" -> multiplo3(lista).forEach { println(it) }
+    //            else        -> println("Tipo inválido")
+    //        }
+    //    }
+
+    //******************Trailing Lambda
+    //    val nomes = arrayOf<String>("Ralf", "Juliana", "Larissa", "Paulo", "Gustavo", "Carla")
+    //
+    //    val funcaoMolde = {
+    //        lista : Array<String>,
+    //        tipo : (Array<String>) -> Sequence<String>
+    //        -> tipo(lista).asSequence<String>().filter{ it.length > 5}
+    //    }
+
+    // Maneira incorreta (Todos os parâmetros)
+    //    println("Maneira incorreta")
+    //    funcaoMolde(
+    //        nomes,
+    //        {nomes.asSequence().filter{ it.contains("u", ignoreCase = true) }}
+    //    ).forEach{ println(it)}
+
+    // Maneira correta (Apenas o último parâmetro não é referenciado)
+    //    println("Maneira correta")
+    //    funcaoMolde(nomes){
+    //        nomes.asSequence().filter{ it.contains("u", ignoreCase = true)}
+    //    }.forEach{ println(it)}
+
     //******************Streams
     // Sequences -> Síncrona
     // Flows -> Assíncrona (Coroutines)
@@ -24,7 +98,7 @@ fun main () {
     //        .any { it.contains("ana", ignoreCase = true) }
     //
     //    println(nome)
-    
+
     // Exemplo 8
     //    val numeros = arrayOf(5, 3, 9, 1, 7)
     //
@@ -32,7 +106,7 @@ fun main () {
     //    val numerosOrdenados = numeros.asSequence().sortedDescending()  //<- Decrescente
     //
     //    numerosOrdenados.forEach { println(it) }
-    
+
     // Exemplo 7
     //    val nomes = arrayOf("Ana", "Juliana", "Cleber", "Ana", "Jaison", "Ana")
     //
@@ -59,7 +133,7 @@ fun main () {
     //                           .takeWhile { it < 0 }
     //
     //    numerosMenorZero.forEach { println(it) }
-    
+
     // Exemplo 4
     //    val numero : Int = 4
     //    val numeros = 1..10
@@ -71,7 +145,7 @@ fun main () {
     //
     //    //print(if(verificaPar == null) "Ímpar" else "Par")
     //    verificarPares.forEach { println(it) }
-    
+
     // Exemplo 3
     //    val numeros : IntRange = (1..100)
     //
@@ -80,7 +154,7 @@ fun main () {
     //                      .drop(numeros.count() - 5)
     //
     //    cincoUltimos.forEach { println(it) }
-    
+
     // Exemplo 2
     //val numeros = 1..20
     //    val numeros : IntRange = (1..20)
@@ -88,7 +162,7 @@ fun main () {
     //    val cincoPrimeiros = numeros.asSequence().take(5)
     //
     //    cincoPrimeiros.forEach { println(it) }
-    
+
     // Exemplo 1
     //    val numeros = arrayOf(1, 2, 3, 4, 5)
     //
