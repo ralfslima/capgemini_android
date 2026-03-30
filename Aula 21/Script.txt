@@ -1,0 +1,187 @@
+// implementation("androidx.navigation:navigation-compose:2.9.7")
+
+package com.example.navegacao
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.navegacao.ui.theme.NavegacaoTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            NavegacaoTheme {
+                GerenciadorTelas()
+            }
+        }
+    }
+}
+
+@Composable
+fun GerenciadorTelas() {
+
+    // NavControler (Controle das rotas/telas e histórico de acesso as telas)
+    val navController = rememberNavController()
+
+    // Coluna
+    Column() {
+        // Exibir o histórico de rotas
+        Box() {
+
+            // Obter o nome de todas as telas (rotas) acessadas
+            val telas by navController.currentBackStack.collectAsState()
+
+            // Mapear dados
+            val nomesTela = telas.mapNotNull { it.destination.route }
+
+            // Exibir
+            Text(
+                nomesTela.toString(),
+                modifier = Modifier.padding(30.dp)
+            )
+        }
+
+        // Exibir as telas
+        NavHost(navController = navController, startDestination = "tela1") {
+
+            // Tela 1
+            composable("tela1") {
+                Tela1(
+                    exibirTela2 = { navController.navigate("tela2") },
+                    exibirTela3 = { navController.navigate("tela3") }
+                )
+            }
+
+            // Tela 2
+            composable("tela2") {
+                Tela2(
+                    exibirTela1 = { navController.navigate("tela1") },
+                    exibirTela3 = { navController.navigate("tela3") }
+                )
+            }
+
+            // Tela 3
+            composable("tela3") {
+                Tela3(
+                    exibirTela1 = { navController.navigate("tela1") },
+                    exibirTela2 = { navController.navigate("tela2") }
+                )
+            }
+
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+@Composable
+fun Tela1(
+    exibirTela2: () -> Unit,
+    exibirTela3: () -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Tela 1",
+            fontSize = 25.sp
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(
+            onClick = exibirTela2
+        ) { Text("Tela 2") }
+
+        Button(
+            onClick = exibirTela3
+        ) { Text("Tela 3") }
+
+    }
+}
+
+@Composable
+fun Tela2(
+    exibirTela1: () -> Unit,
+    exibirTela3: () -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Tela 2",
+            fontSize = 25.sp
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(
+            onClick = exibirTela1
+        ) { Text("Tela 1") }
+
+        Button(
+            onClick = exibirTela3
+        ) { Text("Tela 3") }
+    }
+}
+
+@Composable
+fun Tela3(
+    exibirTela1: () -> Unit,
+    exibirTela2: () -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Tela 3",
+            fontSize = 25.sp
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(
+            onClick = exibirTela1
+        ) { Text("Tela 1") }
+
+        Button(
+            onClick = exibirTela2
+        ) { Text("Tela 2") }
+    }
+}
