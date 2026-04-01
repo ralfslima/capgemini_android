@@ -1,0 +1,94 @@
+package com.example.navegacaomenubottom
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
+import com.example.navegacaomenubottom.ui.theme.NavegacaoMenuBottomTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            NavegacaoMenuBottomTheme {
+
+            }
+        }
+    }
+}
+
+@Composable
+fun GerenciadorNavegacao() {
+
+    // Objeto navController para gerenciar rotas
+    val navController = rememberNavController()
+
+    // TopBar, BottomBar e conteúdos (páginas)
+    Scaffold(
+
+        // BottomBar - Menu inferior
+        bottomBar = {
+
+            // NagigationBar - Componente para englobar os links
+            NavigationBar {
+
+                // Link - Início
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { navController.navigate("inicio") },
+                    icon = { Icon( Icons.Default.Home, contentDescription = null )}
+                )
+
+            }
+
+        }
+
+    ) { }
+
+}
+
+@Composable
+fun Inicio() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = "Início", fontSize = 30.sp)
+    }
+}
+
+@Composable
+fun Perfil() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = "Perfil", fontSize = 30.sp)
+    }
+}
+
+@Composable
+fun Configuracoes() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = "Configurações", fontSize = 30.sp)
+    }
+}
