@@ -1,0 +1,258 @@
+package com.example.navegacaodrawer
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.navegacaodrawer.ui.theme.NavegacaoDrawerTheme
+import kotlinx.coroutines.launch
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            NavegacaoDrawerTheme {
+                Gerenciador()
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Gerenciador() {
+
+    // NavControler
+    val navController = rememberNavController()
+
+    // Objeto para gerenciar a abertura e fechamento do menu
+    val drawerState = rememberDrawerState(
+        initialValue = DrawerValue.Closed
+    )
+
+    // Responsável por alterar o valor do drawerState
+    val scope = rememberCoroutineScope()
+
+    // Englobar menu e conteúdos (telas)
+    ModalNavigationDrawer(
+        // Verificar se o menu inicialmente ficará aberto ou fechado
+        drawerState = drawerState,
+
+        // Estrutura/Conteúdo do menu horizontal
+        drawerContent = {
+            // Menu horizontal
+            ModalDrawerSheet{
+                // Título do menu (opcional)
+                Text(text = "MENU", modifier = Modifier.padding(12.dp))
+
+                // Linha - Divisória (opcional)
+                HorizontalDivider()
+
+                // Link - Início
+                NavigationDrawerItem(
+                    label = { Text("Início") },
+                    selected = false,
+                    onClick = {
+                        // Selecionar a tela que será exibida
+                        navController.navigate("inicio")
+
+                        // Fechar menu
+                        scope.launch { drawerState.close() }
+                    },
+                    icon = {
+                        Icon(
+                            Icons.Default.Home,
+                            contentDescription = null
+                        )
+                    }
+                )
+
+                // Link - Perfil
+                NavigationDrawerItem(
+                    label = { Text("Perfil") },
+                    selected = false,
+                    onClick = {
+                        // Selecionar a tela que será exibida
+                        navController.navigate("perfil")
+
+                        // Fechar menu
+                        scope.launch { drawerState.close() }
+                    },
+                    icon = {
+                        Icon(
+                            Icons.Default.Person,
+                            contentDescription = null
+                        )
+                    }
+                )
+
+                // Link - Configurações
+                NavigationDrawerItem(
+                    label = { Text("Configurações") },
+                    selected = false,
+                    onClick = {
+                        // Selecionar a tela que será exibida
+                        navController.navigate("configuracoes")
+
+                        // Fechar menu
+                        scope.launch { drawerState.close() }
+                    },
+                    icon = {
+                        Icon(
+                            Icons.Default.Settings,
+                            contentDescription = null
+                        )
+                    }
+                )
+            }
+        }
+    ) {
+        // Scaffold
+        Scaffold(
+            // Barra superior
+            topBar = {
+                // Estrutura da barra superior
+                TopAppBar(
+                    title = { Text("Título") },
+                    navigationIcon = {
+                        IconButton(
+                            onClick = { scope.launch { drawerState.open() } }
+                        ) {
+                            Icon(Icons.Default.Menu, contentDescription = null)
+                        }
+                    }
+                )
+            }
+        ) {
+            // Exibição das telas
+            NavHost(
+                navController = navController,
+                startDestination = "inicio"
+            ){
+                composable("inicio") { Inicio() }
+                composable("perfil") { Perfil() }
+                composable("configuracoes") { Configuracoes() }
+            }
+
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+@Composable
+fun Inicio() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Icon(
+            Icons.Default.Home,
+            contentDescription = null,
+            modifier = Modifier.size(80.dp)
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = "Início",
+            fontSize = 25.sp
+        )
+
+    }
+}
+
+@Composable
+fun Perfil() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Icon(
+            Icons.Default.Person,
+            contentDescription = null,
+            modifier = Modifier.size(80.dp)
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = "Perfil",
+            fontSize = 25.sp
+        )
+
+    }
+}
+
+@Composable
+fun Configuracoes() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Icon(
+            Icons.Default.Settings,
+            contentDescription = null,
+            modifier = Modifier.size(80.dp)
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = "Configurações",
+            fontSize = 25.sp
+        )
+
+    }
+}
