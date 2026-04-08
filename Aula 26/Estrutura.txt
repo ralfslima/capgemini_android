@@ -1,0 +1,357 @@
+package com.example.exercicio2_nevegacao
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Card
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.exercicio2_nevegacao.ui.theme.Exercicio2_NevegacaoTheme
+import kotlinx.coroutines.launch
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            Exercicio2_NevegacaoTheme {
+                Gerenciador()
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Gerenciador() {
+
+    // NavControler
+    val navController = rememberNavController()
+
+    // Objeto para gerenciar a abertura e fechamento do menu
+    val drawerState = rememberDrawerState(
+        initialValue = DrawerValue.Closed
+    )
+
+    // Responsável por alterar o valor do drawerState
+    val scope = rememberCoroutineScope()
+
+    // Englobar menu e conteúdos (telas)
+    ModalNavigationDrawer(
+        // Verificar se o menu inicialmente ficará aberto ou fechado
+        drawerState = drawerState,
+
+        // Estrutura/Conteúdo do menu horizontal
+        drawerContent = {
+            // Menu horizontal
+            ModalDrawerSheet{
+                // Título do menu (opcional)
+                Text(text = "MENU", modifier = Modifier.padding(12.dp))
+
+                // Linha - Divisória (opcional)
+                HorizontalDivider()
+
+                // Link - Início
+                NavigationDrawerItem(
+                    label = { Text("Início") },
+                    selected = false,
+                    onClick = {
+                        // Selecionar a tela que será exibida
+                        navController.navigate("inicio")
+
+                        // Fechar menu
+                        scope.launch { drawerState.close() }
+                    },
+                    icon = {
+                        Icon(
+                            Icons.Default.Home,
+                            contentDescription = null
+                        )
+                    }
+                )
+
+                // Link - Perfil
+                NavigationDrawerItem(
+                    label = { Text("Perfil") },
+                    selected = false,
+                    onClick = {
+                        // Selecionar a tela que será exibida
+                        navController.navigate("perfil")
+
+                        // Fechar menu
+                        scope.launch { drawerState.close() }
+                    },
+                    icon = {
+                        Icon(
+                            Icons.Default.Person,
+                            contentDescription = null
+                        )
+                    }
+                )
+
+                // Link - Configurações
+                NavigationDrawerItem(
+                    label = { Text("Configurações") },
+                    selected = false,
+                    onClick = {
+                        // Selecionar a tela que será exibida
+                        navController.navigate("configuracoes")
+
+                        // Fechar menu
+                        scope.launch { drawerState.close() }
+                    },
+                    icon = {
+                        Icon(
+                            Icons.Default.Settings,
+                            contentDescription = null
+                        )
+                    }
+                )
+            }
+        }
+    ) {
+        // Scaffold
+        Scaffold(
+            // Barra superior
+            topBar = {
+                // Estrutura da barra superior
+                TopAppBar(
+                    title = { Text("Título") },
+                    navigationIcon = {
+                        IconButton(
+                            onClick = { scope.launch { drawerState.open() } }
+                        ) {
+                            Icon(Icons.Default.Menu, contentDescription = null)
+                        }
+                    }
+                )
+            }
+        ) {
+            // Exibição das telas
+            NavHost(
+                navController = navController,
+                startDestination = "inicio"
+            ){
+                composable("inicio") { Inicio() }
+                composable("perfil") { Perfil() }
+                composable("configuracoes") { Configuracoes() }
+            }
+
+        }
+
+    }
+
+}
+
+
+
+
+
+
+@Composable
+fun ServiceItem(titulo: String, icon: ImageVector) {
+    Card(
+        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(icon, contentDescription = null)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = titulo)
+        }
+    }
+}
+
+
+
+@Composable
+fun Inicio() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+
+        // Boas-vindas
+        Text(
+            text = "Bem-vindo, Hóspede 👋",
+            style = MaterialTheme.typography.headlineSmall
+        )
+
+        Text(
+            text = "Hotel Paradise Resort",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Card da reserva
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text("Sua Estadia", style = MaterialTheme.typography.titleMedium)
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text("Quarto: 305")
+                Text("Check-in: 10/05")
+                Text("Check-out: 15/05")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Ações rápidas
+        Text("Serviços", style = MaterialTheme.typography.titleMedium)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier.height(180.dp)
+        ) {
+            item {
+                ServiceItem("Room Service", Icons.Default.Star)
+            }
+            item {
+                ServiceItem("Limpeza", Icons.Default.Star)
+            }
+            item {
+                ServiceItem("Spa", Icons.Default.Star)
+            }
+            item {
+                ServiceItem("Atividades", Icons.Default.Star)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Eventos do hotel
+        Text("Eventos Hoje", style = MaterialTheme.typography.titleMedium)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        val eventos = listOf(
+            "Aula de Yoga - 08:00",
+            "Café Colonial - 09:00",
+            "Show ao Vivo - 20:00"
+        )
+
+        LazyColumn {
+            items(eventos) { evento ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text(
+                        text = evento,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun Perfil() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Icon(
+            Icons.Default.Person,
+            contentDescription = null,
+            modifier = Modifier.size(80.dp)
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = "Perfil",
+            fontSize = 25.sp
+        )
+
+    }
+}
+
+@Composable
+fun Configuracoes() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Icon(
+            Icons.Default.Settings,
+            contentDescription = null,
+            modifier = Modifier.size(80.dp)
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = "Configurações",
+            fontSize = 25.sp
+        )
+
+    }
+}
