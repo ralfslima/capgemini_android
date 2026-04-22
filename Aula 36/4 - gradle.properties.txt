@@ -1,0 +1,2 @@
+# Adicionar na primeira linha
+android.disallowKotlinSourceSets=false
