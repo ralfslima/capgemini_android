@@ -1,0 +1,202 @@
+1. Sensores e Movimento
+Acelerômetro (detectar movimento, inclinação, shake)
+Giroscópio (rotação, orientação do dispositivo)
+Magnetômetro / Bússola
+Sensor de proximidade (detectar objeto próximo à tela)
+Sensor de luz (ajuste automático de brilho)
+Sensor de gravidade
+Sensor de passos (contador de passos)
+Sensor de pressão / barômetro
+Sensor de temperatura
+Sensor de umidade
+Sensor de rotação (rotation vector)
+Sensor de orientação
+Detectar queda ou impacto
+Sensor de gesto (em alguns dispositivos)
+Sensor de aceleração linear
+
+-------------------------------------------------------
+
+2. Localização e Mapas
+GPS (latitude e longitude)
+Rede (network provider)
+Geolocalização em tempo real
+Geocoding (converter endereço → coordenadas)
+Reverse Geocoding (coordenadas → endereço)
+Google Maps Compose
+OpenStreetMap / MapLibre
+Marcadores no mapa
+Rotas / navegação
+Geofencing (entrar/sair de área)
+Rastreio estilo Uber/iFood
+Distância entre dois pontos
+Velocidade do dispositivo
+Altitude
+Coordenadas precisas x aproximadas
+
+-------------------------------------------------------
+
+3. Câmera e Multimídia
+Abrir câmera (frontal/traseira)
+Preview de câmera
+Tirar foto
+Salvar imagem no armazenamento
+Gravar vídeo
+Flash
+Zoom
+Modo HDR
+Scanner de QR Code / códigos de barras
+Reconhecimento facial
+Detecção de objetos
+Detector de documentos (scanner)
+CameraX API / Camera2 API
+ML Kit (detecção de rosto, texto, objetos)
+Efeitos de câmera em tempo real
+
+-------------------------------------------------------
+
+4. Áudio e Microfone
+Gravação de áudio
+Reprodução de áudio
+Ajuste de volume
+Captura de som ambiente
+Reconhecimento de voz / speech-to-text
+Detecção de ruído
+Efeitos de áudio (Equalizer, Echo)
+Text-to-speech
+
+-------------------------------------------------------
+
+5. Tela e Display
+Mostrar alertas e mensagens (Toast, SnackBar)
+Exibir diálogos
+Alterar tema (claro/escuro)
+Detectar orientação da tela (portrait/landscape)
+Tela sensível ao toque (touch input)
+Gestos (swipe, pinch, tap, double tap)
+Detectar desbloqueio de tela
+Multitouch / gestos complexos
+Sensor de proximidade para desligar tela
+Alterar brilho programaticamente
+
+-------------------------------------------------------
+
+6. Conectividade
+Conexão com internet (Wi-Fi / celular)
+Verificar se há conexão
+Detectar tipo de conexão (Wi-Fi, 4G, 5G)
+Bluetooth (clássico e BLE)
+NFC (Near Field Communication)
+USB / OTG
+Hotspot / tethering
+WebSockets / Sockets TCP/UDP
+APIs REST / Retrofit / GraphQL
+Transferência de arquivos
+VPN ativa
+
+-------------------------------------------------------
+
+7. Contatos e Comunicação
+Ler contatos
+Adicionar/editar/remover contatos
+Acessar telefone (fazer chamadas)
+Acessar SMS / MMS
+Enviar mensagens programaticamente
+Verificar permissões de chamada
+Agenda de e-mails
+Notificações push (Firebase Cloud Messaging)
+
+-------------------------------------------------------
+
+8. Armazenamento e Arquivos
+Armazenamento interno
+Armazenamento externo / SD card
+Arquivos temporários
+Compartilhar arquivos com outros apps
+Acessar mídia (imagens, vídeos, áudios)
+Download / Upload
+SQLite / Room Database
+Preferences / DataStore
+Cache de dados
+Backup e restore de dados
+
+-------------------------------------------------------
+
+9. Segurança e Sistema
+Verificar modo desenvolvedor
+USB Debugging ativo
+Root detection
+Bloqueio de tela / biometria (impressão digital, face)
+KeyStore e criptografia
+VPN ativo
+Configurações de rede
+Senha do dispositivo
+Apps instalados
+Permissões de apps
+Alertas do sistema (ex: bateria baixa)
+
+-------------------------------------------------------
+
+10. Sensores de Saúde / Wearables
+Contador de passos
+Frequência cardíaca (se disponível)
+Saturação de oxigênio (SpO2)
+Sono (se integrado a wearables)
+Conexão com relógios inteligentes / pulseiras fitness
+
+-------------------------------------------------------
+
+11. Recursos de Sistema e Hardware
+Bateria (nível, carregando/descarregando)
+Vibrar / Haptic feedback
+Notificações do sistema
+Alarmes / Timer / Cronômetro
+Serviços de background
+Threads e jobs (WorkManager)
+Serviços de localização em segundo plano
+Sensor de temperatura da bateria
+Sensor de pressão do toque (Force Touch, se disponível)
+Detectar modo avião
+Detectar rotação da tela
+Detectar orientação do dispositivo
+
+-------------------------------------------------------
+
+12. Inteligência e Aprendizado de Máquina
+ML Kit (detecção de texto, rosto, objetos)
+Reconhecimento de fala
+Tradução de texto
+Reconhecimento de imagem
+Classificação de imagem
+Barcode / QR Code
+Inferência local com TensorFlow Lite
+Análise de vídeo / imagem
+
+-------------------------------------------------------
+
+13. Internet e Web
+WebView (exibir página web)
+Download / Upload
+HTTP Requests
+WebSocket
+Firebase Realtime Database
+Firebase Cloud Messaging
+OAuth / Login social (Google, Facebook, Apple)
+
+-------------------------------------------------------
+
+14. Outras Funcionalidades
+Sensores de impressão digital e face
+Acelerômetro para detectar queda
+Captura de tela programática
+Atalhos de app
+Widgets
+NFC / Smart Tags
+Beacon detection
+Geofencing
+BLE (Bluetooth Low Energy)
+Conexão com IoT
+ARCore / Realidade aumentada
+VR / Cardboard
+Sensor de temperatura, luz, som
+Feedback háptico (vibração, toque)
